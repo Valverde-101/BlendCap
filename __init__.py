@@ -384,14 +384,22 @@ class BLENDCAP_AddonPreferences(bpy.types.AddonPreferences):
                           icon='ERROR')
                 _label_wrapped(
                     col, context,
-                    "Accept the SAM 3D Body license with your own account, "
-                    "then place model.ckpt, model_config.yaml and "
-                    "assets/mhr_model.pt under checkpoints/sam-3d-body-dinov3/.")
+                    "Review Meta's SAM and DINOv3 license terms. The SAM 3D "
+                    "Body download is gated by Hugging Face; the checkpoint "
+                    "also contains a DINOv3 backbone under separate terms. "
+                    "After accepting the SAM access terms, place model.ckpt, "
+                    "model_config.yaml and assets/mhr_model.pt under "
+                    "checkpoints/sam-3d-body-dinov3/.")
                 row = col.row()
                 row.operator(
-                    "wm.url_open", text="Open SAM 3D Body license page",
+                    "wm.url_open", text="Open SAM 3D Body access page",
                     icon='URL').url = (
                         "https://huggingface.co/facebook/sam-3d-body-dinov3")
+                row = col.row()
+                row.operator(
+                    "wm.url_open", text="Read DINOv3 license",
+                    icon='URL').url = (
+                        "https://github.com/facebookresearch/dinov3/blob/main/LICENSE.md")
             if has_installer:
                 row = box.row()
                 row.operator("blendcap.install_dependencies",
