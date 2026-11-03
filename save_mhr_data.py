@@ -73,6 +73,8 @@ SCRIPT_DIR = Path(__file__).parent.absolute()
 CKPT_DIR = SCRIPT_DIR / "checkpoints"
 os.environ["TORCH_HOME"] = str(CKPT_DIR / "torch")
 os.environ["HF_HOME"] = str(CKPT_DIR / "huggingface")
+os.environ["YOLO_CONFIG_DIR"] = str(CKPT_DIR)
+os.environ["MPLCONFIGDIR"] = str(CKPT_DIR / "matplotlib")
 
 # Point the vendored DINOv3 backbone loader at the repo we ship INSIDE the
 # addon (architecture code only, ~1 MB) so it loads offline via torch.hub

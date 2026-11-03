@@ -369,6 +369,29 @@ class BLENDCAP_AddonPreferences(bpy.types.AddonPreferences):
                 details.append(f"ORT {marker['ort_version']}")
             if details:
                 box.label(text="    " + "    ".join(details))
+            sam_dir = os.path.join(
+                _addon_dir(), "checkpoints", "sam-3d-body-dinov3")
+            sam_files = (
+                os.path.join(sam_dir, "model.ckpt"),
+                os.path.join(sam_dir, "model_config.yaml"),
+                os.path.join(sam_dir, "assets", "mhr_model.pt"),
+            )
+            missing_sam = [path for path in sam_files
+                           if not os.path.isfile(path)]
+            if missing_sam:
+                col = box.column(align=True)
+                col.label(text="Body capture still needs Meta's model files.",
+                          icon='ERROR')
+                _label_wrapped(
+                    col, context,
+                    "Accept the SAM 3D Body license with your own account, "
+                    "then place model.ckpt, model_config.yaml and "
+                    "assets/mhr_model.pt under checkpoints/sam-3d-body-dinov3/.")
+                row = col.row()
+                row.operator(
+                    "wm.url_open", text="Open SAM 3D Body license page",
+                    icon='URL').url = (
+                        "https://huggingface.co/facebook/sam-3d-body-dinov3")
             if has_installer:
                 row = box.row()
                 row.operator("blendcap.install_dependencies",
