@@ -32,8 +32,8 @@ tags = [
 ]
 
 [permissions]
-network = "Download the AI model weights and Python dependencies on first install."
-files = "Read input video and write capture caches, BVH files, and the bundled Python environment."
+network = "Fetch AI models and Python dependencies during setup"
+files = "Read video and write BVH cache and Python environment files"
 
 [build]
 # Only consulted by `blender --command extension build`. Keeps runtime
